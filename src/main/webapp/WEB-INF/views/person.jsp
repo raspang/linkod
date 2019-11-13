@@ -166,15 +166,14 @@
 					<c:choose>
 						<c:when test="${edit}">
 							<input type="submit" value="Update"
-								class="btn btn-primary btn-sm" /> or <a
-								href="<c:url value='/listCode' />">Cancel</a>
+								class="btn btn-primary btn-sm" />
 						</c:when>
 						<c:otherwise>
 							<input type="submit" value="Register"
-								class="btn btn-primary btn-sm" /> or <a
-								href="<c:url value='/listvoters' />">Cancel</a>
+								class="btn btn-primary btn-sm" />
 						</c:otherwise>
 					</c:choose>
+					 or <a href="<c:url value='/listvoters' />">Cancel</a>
 				</div>
 			</div>
 			</div>

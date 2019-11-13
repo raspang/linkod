@@ -91,7 +91,7 @@
 					width="100%">
 					<thead>
 						<tr>
-							<th>ID</th>
+							
 							<th>Name</th>
 							<th>Company</th>
 							<th>Designation</th>
@@ -101,6 +101,7 @@
 							<th>Status</th>
 							<th>Business Line</th>
 							<th>Attended</th>
+							<th>ID no.</th>
 							<th>Code</th>
 							<th></th>
 							<th></th>

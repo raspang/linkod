@@ -20,9 +20,7 @@ $(function() {
 						dataSrc : ''
 					},
 					columns : [
-							{
-								data : 'id'
-							},
+
 							{
 								data : 'completeName',
 								mRender : function(data, type, row) {
@@ -32,10 +30,18 @@ $(function() {
 											str += "<div style='width: 180px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden'>"+data+"</div>";
 										}
 										return str;
-									}
+								}
 							},
 							{
-								data : 'company'
+								data : 'company',
+									mRender : function(data, type, row) {
+										var str = '';
+
+										if (data != null){
+											str += "<div style='width: 180px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden'>"+data+"</div>";
+										}
+										return str;
+									}
 							},
 							{
 								data : 'designation'
@@ -69,7 +75,18 @@ $(function() {
 								data : 'attended'
 							},
 							{
-								data : 'code'
+								data : 'id'
+							},
+							{
+								data : 'code',
+								mRender : function(data, type, row) {
+									var str = '';
+
+									if (data != null){
+										str += "<pre>"+data+"</pre>";
+									}
+									return str;
+							}
 							},
 							{
 								data : 'id',
@@ -100,14 +117,14 @@ $(function() {
 												+ window.contextRoot
 												+ '/edit-person-'
 												+ data
-												+ '" class="btn btn-success custom-width" style="color: #ffffff;" >edit</a>&nbsp;';
+												+ '" class="btn btn-success custom-width" style="color: #ffffff;" >Edit</a>&nbsp;';
 										str += '&nbsp;<a href="'
 												+ window.contextRoot
 												+ '/delete-person-'
 												+ data
 												+ '" onclick="return confirm('
 												+ '\'Are you sure you want to delete this participant?\''
-												+ ');" class="btn btn-danger custom-width" style="color: #ffffff;">delete</a>';
+												+ ');" class="btn btn-danger custom-width" style="color: #ffffff;">Delete</a>';
 									}
 									return str;
 								}

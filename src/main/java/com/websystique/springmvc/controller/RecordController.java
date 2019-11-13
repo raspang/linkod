@@ -186,14 +186,14 @@ public class RecordController {
 
 		HashMap<String, Object> hmParams = new HashMap<String, Object>();
 		
-/*		BufferedImage image1 =  null;
+		BufferedImage image1 =  null;
 		
 		try {
 			 File initialImage = new File(request.getSession().getServletContext().getRealPath("/jasper/dost.png"));
 			 image1 = ImageIO.read(initialImage);
 			}catch(Exception e) {}
 		
-		hmParams.put("dost", image1);*/
+		hmParams.put("dost", image1);
 
 		JasperReport jasperReport = jrdao.getCompiledFile(reportFileName, request);
 

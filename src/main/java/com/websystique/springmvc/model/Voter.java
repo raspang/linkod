@@ -1,20 +1,25 @@
 package com.websystique.springmvc.model;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 import java.util.UUID;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
-import org.joda.time.LocalDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -30,7 +35,6 @@ public class Voter implements Serializable{
 	private Long id;
 	
 	private boolean printed = false;
-	
 	
 	@NotEmpty
 	@Column(name="code", unique=true, nullable=false)
@@ -61,12 +65,16 @@ public class Voter implements Serializable{
 	
 	private String attended;
 	
-	
-	
 	@Transient
 	private String completeName;
 	
+	@Transient
+	private String attendsStr;
 
+    @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "voter", orphanRemoval = true)
+    private List<Attended> attends = new ArrayList<>();
+    
+    
 	public Voter() {		
 		this.code = "R12"+UUID.randomUUID().toString().substring(23).toUpperCase();
 	}
@@ -140,14 +148,6 @@ public class Voter implements Serializable{
 		this.gender = gender;
 	}
 
-	public String getCompleteName() {
-		if(lastName.isEmpty() && firstName.isEmpty())
-			return "";
-		if(middleName.length() > 0)
-			return lastName.toUpperCase()+", "+firstName.toUpperCase()+" "+middleName.substring(0, 1).toUpperCase();
-		return lastName.toUpperCase()+", "+firstName.toUpperCase();
-	}
-
 	public void setCompleteName(String completeName) {
 		this.completeName = completeName;
 	}
@@ -167,8 +167,6 @@ public class Voter implements Serializable{
 	public void setDesignation(String designation) {
 		this.designation = designation;
 	}
-
-
 
 	public String getStatus() {
 		return status;
@@ -198,6 +196,38 @@ public class Voter implements Serializable{
 		this.age = age;
 	}
 
+	public String getCompleteName() {
+		if(lastName.isEmpty() && firstName.isEmpty())
+			return "";
+		if(middleName.length() > 0)
+			return lastName.toUpperCase()+", "+firstName.toUpperCase()+" "+middleName.substring(0, 1).toUpperCase();
+		return lastName.toUpperCase()+", "+firstName.toUpperCase();
+	}
+	
+	public List<Attended> getAttends() {
+		return attends;
+	}
+
+	public void setAttends(List<Attended> attends) {
+		this.attends = attends;
+	}
+
+	public String getAttendsStr() {
+		String str = "";
+		
+		String pattern = "MMM-dd";
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+		
+		for(Attended attended : attends)
+			str += simpleDateFormat.format(attended.getDate())+" ";
+		return str;
+	}
+
+	public void setAttendsStr(String attendsStr) {
+		this.attendsStr = attendsStr;
+	}
+
+	
 
 	
 }

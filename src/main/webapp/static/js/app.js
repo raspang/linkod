@@ -72,7 +72,7 @@ $(function() {
 							},
 				
 							{
-								data : 'attended'
+								data : 'attendsStr'
 							},
 							{
 								data : 'id'
@@ -94,15 +94,12 @@ $(function() {
 								mRender : function(data, type, row) {
 
 									var str = '';
-
-									if (!row.printed)
 										str += '<a href="'
 												+ window.contextRoot
-												+ '/update-code?codeid='
+												+ '/mark-participant-'
 												+ data
 												+ '"><p  style="width:10%; padding-bottom:0; margin-bottom:0; border-bottom:0"><span style="color:green" class="glyphicon glyphicon-edit"></span></p></a>';
-									else
-										str += '<p  style="width:10%; padding-bottom:0; margin-bottom:0; border-bottom:0"><span style="color:red" class="glyphicon glyphicon-remove-sign"></span></p>'
+
 									return str;
 								}
 							},

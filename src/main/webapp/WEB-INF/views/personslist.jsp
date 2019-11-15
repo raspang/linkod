@@ -12,18 +12,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <title>Users List</title>
-<script>
+	<script>
 		window.contextRoot = '${contextRoot}'
 			window.userRole = 'USER';
-
-	
 		</script>
 	
 	<sec:authorize access="hasRole('ADMIN')">
 		<script type="text/javascript">
 			window.userRole = 'ADMIN';
 			</script>
-		</sec:authorize>
+			
+
+	</sec:authorize>
 
 <link href="<c:url value='/static/css/bootstrap.css'/>" rel="stylesheet"></link>
 <%-- <link href="<c:url value='/static/css/app.css' />" rel="stylesheet"></link> --%>
@@ -70,9 +70,12 @@
 <body>
 
 	<div class="container-fluid">
+	
+
 		<div class="table-wrapper">
 			<div class="table-title">
 				<%@include file="authheader.jsp"%>
+
 				<span class="lead">List of Participants</span>
 				<sec:authorize access="hasRole('ADMIN')">
 		  		&nbsp;|&nbsp;<span class="lead"><a
@@ -80,18 +83,34 @@
 				</sec:authorize>
 			</div>
 
+			
 			<div class="card-body">
 			<sec:authorize access="hasRole('ADMIN')">
 				<div class="well">
 					<a class="btn btn-primary btn-xs"
 						href="<c:url value='/newperson' />">Add New</a>
+					
+					<sec:authorize access="hasRole('ADMIN')">	
+					Event Date:
+						<div style="float:right">
+						
+						 <form:form action="${contextRoot}/select-event" method="GET">
+							<select name="selecteventid" class="form-control" onchange="this.form.submit()">
+							<c:forEach items="${events}" var="item">
+							   <option value="${item.id}" <c:if test="${item.enable}"> selected="selected"</c:if> >${item.dateStr}</option>
+							</c:forEach>
+						</select>
+						 </form:form> 
+						</div>
+					
+						</sec:authorize>
+					
 				</div>
+	
 			</sec:authorize>
-				<table class="table table-hover table-bordered" id="voter"
-					width="100%">
+				<table class="table table-hover table-bordered" id="voter" width="100%">
 					<thead>
 						<tr>
-							
 							<th>Name</th>
 							<th>Company</th>
 							<th>Designation</th>

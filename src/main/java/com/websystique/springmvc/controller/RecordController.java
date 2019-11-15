@@ -16,7 +16,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.joda.time.LocalDate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.MessageSource;
 import org.springframework.security.authentication.AuthenticationTrustResolver;
@@ -33,13 +32,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.websystique.springmvc.model.Attended;
 import com.websystique.springmvc.model.Barangay;
 import com.websystique.springmvc.model.Code;
+import com.websystique.springmvc.model.EventDate;
 import com.websystique.springmvc.model.Purok;
-import com.websystique.springmvc.model.ReportCode;
 import com.websystique.springmvc.model.Voter;
+import com.websystique.springmvc.service.AttendedService;
 import com.websystique.springmvc.service.BarangayService;
 import com.websystique.springmvc.service.CodeService;
+import com.websystique.springmvc.service.EventDateService;
 import com.websystique.springmvc.service.PurokService;
 import com.websystique.springmvc.service.ReportCodeService;
 import com.websystique.springmvc.service.UserProfileService;
@@ -66,6 +69,13 @@ public class RecordController {
 	
 	@Autowired
 	VoterService voterService;
+	
+	@Autowired
+	AttendedService attendedService;
+	
+	
+	@Autowired
+	EventDateService eventDateService;
 
 	@Autowired
 	CodeService codeService;
@@ -92,8 +102,11 @@ public class RecordController {
 	@RequestMapping(value = { "","/listvoters" }, method = RequestMethod.GET)
 	public String listVoters(ModelMap model) {
 		List<Voter> voters = voterService.findAllVoters();
+		
 		model.addAttribute("voters", voters);
+		model.addAttribute("events", eventDateService.findAllEventDates());
 		model.addAttribute("loggedinuser", getPrincipal());
+		
 		return "personslist";
 	}
 	
@@ -121,6 +134,53 @@ public class RecordController {
 		return codeService.findAllCodes();
 	}*/
 
+	
+	@RequestMapping(value = { "/mark-participant-{id}" }, method = RequestMethod.GET)
+	public String markAttended(@PathVariable String id, ModelMap model,HttpServletRequest request) {
+
+		Voter voter = voterService.findById(Long.parseLong(id));
+		
+		Attended attended = new Attended();
+		List<EventDate> events = eventDateService.findAllEnableEventDates();
+		if(!events.isEmpty())
+			attended.setDate(events.get(events.size()-1).getDate());
+		attended.setVoter(voter);
+		
+		attendedService.saveAttended(attended);
+		
+		voter.getAttends().add(attended);
+	
+		voterService.updateVoter(voter);
+		
+		model.addAttribute("events", eventDateService.findAllEventDates());
+		model.addAttribute("loggedinuser", getPrincipal());
+		//return "personslist";
+		return "redirect:/listvoters";
+	}
+	
+	
+
+	@RequestMapping(value = { "/select-event" }, method = RequestMethod.GET)
+	public String selectEvent(@RequestParam(name = "selecteventid") String selecteventid, ModelMap model, HttpServletRequest request) {
+
+		EventDate eventDate = eventDateService.findById(Integer.parseInt(selecteventid));
+		List<EventDate> eventDates = eventDateService.findAllEventDates();
+		
+		// reset nalang
+		for(EventDate e : eventDateService.findAllEventDates()) {
+			e.setEnable(false);
+			eventDateService.updateEventDate(e);
+		}
+		
+		eventDate.setEnable(true);
+		eventDateService.updateEventDate(eventDate);
+		
+		model.addAttribute("loggedinuser", getPrincipal());
+		return "personslist";
+	}
+		
+	
+	
 	@RequestMapping(value = { "/generatecode" }, method = RequestMethod.GET)
 	public String generate(@RequestParam(name = "barangayId") String barangayId,
 			@RequestParam(name = "printNo") String printNo,ModelMap model,

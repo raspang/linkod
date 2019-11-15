@@ -28,7 +28,6 @@ public class Attended implements Serializable{
 	private Long id;
 	
     @JsonFormat(pattern = "yyyy-mm-dd")
-    @Column(unique=true, nullable=false)
     private Date date;
     
     @ManyToOne(fetch = FetchType.EAGER)
@@ -65,7 +64,6 @@ public class Attended implements Serializable{
 	public void setVoter(Voter voter) {
 		this.voter = voter;
 	}
-    
-    
+
 
 }

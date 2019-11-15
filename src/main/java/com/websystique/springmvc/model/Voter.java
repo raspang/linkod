@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
@@ -16,10 +17,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import javax.persistence.PrePersist;
+import javax.persistence.PreUpdate;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
 import org.hibernate.validator.constraints.NotEmpty;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -63,7 +68,6 @@ public class Voter implements Serializable{
 	
 	private String business;
 	
-	private String attended;
 	
 	@Transient
 	private String completeName;
@@ -73,6 +77,12 @@ public class Voter implements Serializable{
 
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "voter", orphanRemoval = true)
     private List<Attended> attends = new ArrayList<>();
+    
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    @Column(updatable = false)
+    private Date created_At;
+    @JsonFormat(pattern = "yyyy-mm-dd")
+    private Date updated_At;
     
     
 	public Voter() {		
@@ -124,13 +134,6 @@ public class Voter implements Serializable{
 		return contact;
 	}
 
-	public String getAttended() {
-		return attended;
-	}
-
-	public void setAttended(String attended) {
-		this.attended = attended;
-	}
 
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
@@ -227,7 +230,13 @@ public class Voter implements Serializable{
 		this.attendsStr = attendsStr;
 	}
 
-	
+	public Date getUpdated_At() {
+		return updated_At;
+	}
 
-	
+	public void setUpdated_At(Date updated_At) {
+		this.updated_At = updated_At;
+	}
+
+
 }

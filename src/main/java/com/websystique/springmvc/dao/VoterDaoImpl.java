@@ -26,7 +26,7 @@ public class VoterDaoImpl extends AbstractDao<Long, Voter> implements VoterDao {
 
 	@SuppressWarnings("unchecked")
 	public List<Voter> findAllVoters() {
-		Criteria criteria = createEntityCriteria().addOrder(Order.asc("id"));
+		Criteria criteria = createEntityCriteria().addOrder(Order.desc("updated_At")).addOrder(Order.desc("id"));;
 		criteria.setResultTransformer(Criteria.DISTINCT_ROOT_ENTITY);//To avoid duplicates.
 		List<Voter> barangays = (List<Voter>) criteria.list();
 		

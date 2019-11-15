@@ -144,6 +144,7 @@ public class RecordController {
 		List<EventDate> events = eventDateService.findAllEnableEventDates();
 		if(!events.isEmpty())
 			attended.setDate(events.get(events.size()-1).getDate());
+	
 		attended.setVoter(voter);
 		
 		attendedService.saveAttended(attended);

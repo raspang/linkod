@@ -1,5 +1,6 @@
 package com.websystique.springmvc.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,8 +24,8 @@ public class VoterServiceImpl implements VoterService{
 	}
 
 
-	public void saveVoter(Voter code) {
-		dao.save(code);
+	public void saveVoter(Voter voter) {
+		dao.save(voter);
 	}
 
 	/*
@@ -46,8 +47,7 @@ public class VoterServiceImpl implements VoterService{
 			entity.setGender(code.getGender());
 			entity.setStatus(code.getStatus());
 			entity.setBusiness(code.getBusiness());
-			entity.setAttended(code.getAttended());
-
+			entity.setUpdated_At(new Date());
 		}
 	}
 

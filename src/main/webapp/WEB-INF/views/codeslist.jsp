@@ -52,7 +52,7 @@
          <div class="table-wrapper"> 
 				<div class="table-title">
 				<%@include file="authheader.jsp" %>	
-				<span class="lead"><a href="${contextRoot}/listvoters">List of Voters</a></span>
+				<span class="lead"><a href="${contextRoot}/listparticipants">List of Voters</a></span>
 				&nbsp;|&nbsp;
 				<span class="lead">Generated Codes</span>	
 				<sec:authorize access="hasRole('ADMIN')">

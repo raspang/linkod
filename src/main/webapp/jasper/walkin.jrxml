@@ -15,7 +15,7 @@
 		<band height="115" splitType="Stretch">
 			<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.FreeLayout"/>
 			<staticText>
-				<reportElement x="-5" y="86" width="570" height="29" uuid="60caecb8-8106-4984-93ea-512314cc26db"/>
+				<reportElement x="-5" y="82" width="570" height="29" uuid="60caecb8-8106-4984-93ea-512314cc26db"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Century" size="18"/>
 				</textElement>
@@ -531,14 +531,14 @@ General Santos City]]></text>
 				<text><![CDATA[Name & Signature]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="120" y="457" width="343" height="35" uuid="8eac04e7-b422-4fc2-a43a-1b2097988b78"/>
+				<reportElement x="120" y="457" width="370" height="35" uuid="8eac04e7-b422-4fc2-a43a-1b2097988b78"/>
 				<textElement textAlignment="Center" verticalAlignment="Bottom">
 					<font fontName="Century" size="11" isBold="true"/>
 				</textElement>
 				<text><![CDATA[2019 NATIONAL SCIENCE AND TECHNOLOGY WEEK-REGIONAL CELEBRATION]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="122" y="490" width="315" height="45" uuid="b32f55d8-8702-4295-859c-828936c44180"/>
+				<reportElement x="122" y="490" width="368" height="45" uuid="b32f55d8-8702-4295-859c-828936c44180"/>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Century" size="10"/>
 				</textElement>
@@ -547,7 +547,7 @@ SM City Gensan
 General Santos City]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="129" y="535" width="294" height="28" uuid="3d5a98cf-5fc4-42ec-8698-5f816843d49b"/>
+				<reportElement x="40" y="535" width="450" height="28" uuid="3d5a98cf-5fc4-42ec-8698-5f816843d49b"/>
 				<textElement textAlignment="Center" verticalAlignment="Top">
 					<font fontName="Century" size="18"/>
 				</textElement>
@@ -557,7 +557,7 @@ General Santos City]]></text>
 				<reportElement x="-10" y="450" width="573" height="1" uuid="0ce4e791-bd2f-48b7-b13b-736cb2508a54"/>
 			</line>
 			<componentElement>
-				<reportElement x="172" y="563" width="211" height="27" uuid="9438227a-19bd-4bd6-9d22-06493c2d3f2e"/>
+				<reportElement x="157" y="563" width="211" height="27" uuid="9438227a-19bd-4bd6-9d22-06493c2d3f2e"/>
 				<jr:barbecue xmlns:jr="http://jasperreports.sourceforge.net/jasperreports/components" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports/components http://jasperreports.sourceforge.net/xsd/components.xsd" type="Code128" drawText="false" checksumRequired="false">
 					<jr:codeExpression><![CDATA[$F{number}]]></jr:codeExpression>
 				</jr:barbecue>
@@ -574,7 +574,7 @@ General Santos City]]></text>
 				<imageExpression><![CDATA[$P{dost}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="5" y="608" width="559" height="26" uuid="13d37f07-d363-446c-b59f-d74a573dbad5"/>
+				<reportElement x="7" y="610" width="559" height="26" uuid="13d37f07-d363-446c-b59f-d74a573dbad5"/>
 				<textElement>
 					<font fontName="Century" size="8" isBold="true"/>
 				</textElement>

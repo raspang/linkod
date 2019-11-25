@@ -174,7 +174,7 @@
 								class="btn btn-primary btn-sm" />
 						</c:otherwise>
 					</c:choose>
-					 or <a href="<c:url value='/listvoters' />">Cancel</a>
+					 or <a href="<c:url value='/listparticipants' />">Cancel</a>
 				</div>
 			</div>
 			</div>

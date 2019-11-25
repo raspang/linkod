@@ -6,7 +6,7 @@ $(function() {
 	if ($table.length) {
 
 		var jsonUrl = '';
-		jsonUrl = window.contextRoot + '/json/data/listvoters';
+		jsonUrl = window.contextRoot + '/json/data/listparticipants';
 
 		/* alert(jsonUrl); */
 		$table

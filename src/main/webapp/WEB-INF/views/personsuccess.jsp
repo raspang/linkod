@@ -20,7 +20,7 @@
 			<div class="alert alert-success lead">${success}</div>
 
 			<span class="well floatRight"> Go to <a
-				href="<c:url value='/listvoters' />">Participants List</a>
+				href="<c:url value='/listparticipants' />">Participants List</a>
 			</span>
 		</div>
 	</div>

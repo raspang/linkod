@@ -21,7 +21,7 @@
 
 <body>
 	
-	<div class="container-fluid">
+	<div class="container">
 		<%@include file="authheader.jsp"%>
 
 		<div class="well lead">Participant Registration Form</div>
@@ -97,6 +97,18 @@
 						<form:input type="text" path="contact" id="contact" class="form-control input-sm" />
 						<div class="has-error">
 							<form:errors path="contact" class="help-inline" />
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label class="col-md-3 control-lable" for="contact">Email</label>
+					<div class="col-md-7">
+						<form:input type="email" path="email" id="email" class="form-control input-sm" />
+						<div class="has-error">
+							<form:errors path="email" class="help-inline" />
 						</div>
 					</div>
 				</div>

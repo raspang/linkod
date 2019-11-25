@@ -5,6 +5,8 @@
 
 <html>
 
+
+	
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 	<title>User Registration Form</title>
@@ -13,7 +15,7 @@
 </head>
 
 <body>
- 	   <div class="container-fluid">
+ 	   <div class="container">
 		<%@include file="authheader.jsp" %>
 
 		<div class="well lead">User Registration Form</div>

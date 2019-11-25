@@ -11,8 +11,7 @@ $(function() {
 		/* alert(jsonUrl); */
 		$table
 				.DataTable({
-
-					order : [ [ 1, "asc" ] ],
+					responsive: true,
 					lengthMenu : [ [ 10, 20 ], [ '10 Records', '20 Records' ] ],
 					pageLength : 10,
 					ajax : {
@@ -20,33 +19,51 @@ $(function() {
 						dataSrc : ''
 					},
 					columns : [
+						{
+							data : 'id'
+						},
+						{
+							data : 'code',
+							mRender : function(data, type, row) {
+								var str = '';
 
-							{
-								data : 'completeName',
-								mRender : function(data, type, row) {
-										var str = '';
-
-										if (data != null){
-											str += "<div style='width: 180px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden'>"+data+"</div>";
-										}
-										return str;
+								if (data != null){
+									str += "<code>"+data+"</code>";
 								}
+
+								return str;
+						}
+						},
+						{
+							data : 'id',
+							bSortable : false,
+							mRender : function(data, type, row) {
+
+								var str = '';
+								if (userRole === 'ADMIN') {
+									str += '<a href="'
+											+ window.contextRoot
+											+ '/mark-participant-'
+											+ data
+											+ '"><span style="color:green" class="glyphicon glyphicon-thumbs-up"></span></a>';
+								}
+								return str;
+							}
+						},
+						{
+							data : 'attendsStr'
+						},
+							{
+								data : 'completeName'
 							},
 							{
-								data : 'company',
-									mRender : function(data, type, row) {
-										var str = '';
-
-										if (data != null){
-											str += "<div style='width: 180px;text-overflow: ellipsis;white-space: nowrap;overflow: hidden'>"+data+"</div>";
-										}
-										return str;
-									}
+								data : 'company'
+					
 							},
 							{
 								data : 'designation'
 							},
-							{
+						/*	{
 								data : 'contact'
 							},
 							{
@@ -66,43 +83,13 @@ $(function() {
 							},
 							{
 								data : 'status'
-							},
+							},*/
 							{
 								data : 'business'
 							},
 				
-							{
-								data : 'attendsStr'
-							},
-							{
-								data : 'id'
-							},
-							{
-								data : 'code',
-								mRender : function(data, type, row) {
-									var str = '';
+	
 
-									if (data != null){
-										str += "<pre>"+data+"</pre>";
-									}
-									return str;
-							}
-							},
-							{
-								data : 'id',
-								bSortable : false,
-								mRender : function(data, type, row) {
-
-									var str = '';
-										str += '<a href="'
-												+ window.contextRoot
-												+ '/mark-participant-'
-												+ data
-												+ '"><p  style="width:10%; padding-bottom:0; margin-bottom:0; border-bottom:0"><span style="color:green" class="glyphicon glyphicon-edit"></span></p></a>';
-
-									return str;
-								}
-							},
 							{
 								data : 'id',
 								bSortable : false,
@@ -114,14 +101,14 @@ $(function() {
 												+ window.contextRoot
 												+ '/edit-person-'
 												+ data
-												+ '" class="btn btn-success custom-width" style="color: #ffffff;" >Edit</a>&nbsp;';
+												+ '" class="btn btn-success custom-width"  ><span style="color: #ffffff;" class="glyphicon glyphicon-pencil"></span></a>&nbsp;';
 										str += '&nbsp;<a href="'
 												+ window.contextRoot
 												+ '/delete-person-'
 												+ data
 												+ '" onclick="return confirm('
 												+ '\'Are you sure you want to delete this participant?\''
-												+ ');" class="btn btn-danger custom-width" style="color: #ffffff;">Delete</a>';
+												+ ');" class="btn btn-danger custom-width" ><span style="color: #ffffff;" class="glyphicon glyphicon-remove"></span></a>';
 									}
 									return str;
 								}

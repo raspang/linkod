@@ -265,3 +265,5 @@ table.table .avatar {
 	bgcolor:#FF0000;
 }
 
+
+.table th, .table td { text-align: center;max-width: 200px; min-width: 70px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }

@@ -59,15 +59,17 @@
 <body>
 	<script>
 		 window.contextRoot = '${contextRoot}'
-		 window.userRole = 'USER';
-	</script>
+			window.userRole = 'USER';
+		</script>
 	
 	<sec:authorize access="hasRole('ADMIN')">
 		<script type="text/javascript">
 			window.userRole = 'ADMIN';
-		</script>
+			</script>
 	</sec:authorize>
-	<div class="container-fluid">
+	<div class="container">
+
+
 
 		<div class="table-wrapper">
 			<div class="table-title">
@@ -77,78 +79,21 @@
 
 			
 			<div class="card-body">
-			<sec:authorize access="hasRole('ADMIN')">
-				<div class="well">
-					<a class="btn btn-primary"
-						href="<c:url value='/newperson' />">Add New</a>
-					
-					<sec:authorize access="hasRole('ADMIN')">	
-					
 
-						<div style="float:right">
-						 <form:form action="${contextRoot}/select-event" method="GET">
-						
-							<select name="selecteventid" class="form-control" onchange="this.form.submit()">
-							<c:forEach items="${events}" var="item">
-							   <option value="${item.id}" <c:if test="${item.enable}"> selected="selected"</c:if> >${item.dateStr}</option>
-							</c:forEach>
-						</select>
-						
-						 </form:form> 
-						</div>
-					
-						 <div style="float:right;padding-right:10px">
-							<h4><span class="label label-success">Event Date:</span></h4> 
-						</div>
-						</sec:authorize>
-					
-				</div>
 	
-			</sec:authorize>
-			<div class="table-responsive">
-				<table class="table table-hover table-bordered" style="width: 100%;"id="voter" >
-					<thead>
-						<tr>
-							<th >ID no.</th>
-							<th style="width:8%">Code</th>
-							<sec:authorize access="hasRole('ADMIN')">
-							<th style="width:1%"></th>
-							</sec:authorize>
-							<th >Attended</th>
-							<th >Name</th>
-							<th >Company</th>
-							<th >Designation</th>
-<!-- 							<th >Contact</th>
-							<th >Age</th>
-							<th >Gender</th>
-							<th >Status</th> -->
-							<th >Business Line</th>
-							<sec:authorize access="hasRole('ADMIN')">
-							<th ></th>
-							</sec:authorize>
-						</tr>
-					</thead>
-				</table>
-				</div>
+				<span class="label label-success">Current Event: ${currentDate}</span>
+
+				<h4>ACADEME : <span class="badge badge-secondary">${participantsACADEME}</span></h4>
+			 	<h4>NGA :<span class="badge badge-secondary">${participantsNGA }</span></h4>
+			  	<h4>STUDENT :<span class="badge badge-secondary">${participantsSTUDENT }</span></h4>
+			   	<h4>MEDIA :<span class="badge badge-secondary">${participantsMEDIA }</span></h4>
+			    <h4>NGO :<span class="badge badge-secondary">${participantsNGO }</span></h4>
+			    <h4>MSME :<span class="badge badge-secondary">${participantsMSME }</span></h4>
+			    <h4>OTHERS :<span class="badge badge-secondary">${participantsOTHERS }</span></h4>
+
 			</div>
 
 
-			
-			<sec:authorize access="hasRole('ADMIN')">
-				<div class="well">
-
-					<button type="button" class="btn btn-warning btn-xs"
-						data-toggle="modal" data-target="#modalGenerateParticipants">Generate</button>
-				</div>
-			</sec:authorize>
-			
-			<sec:authorize access="hasRole('ADMIN')">
-				<div class="well">
-
-					<button type="button" class="btn btn-warning btn-xs"
-						data-toggle="modal" data-target="#modalPDFParticipants">PDF</button>
-				</div>
-			</sec:authorize>
 
 		</div>
 
@@ -204,27 +149,14 @@
 					<div class="modal-body">
 
 						<div class="form-group">
-							<label class="control-label col-md-6">Range No. (ex. 1 - 50)</label>
+							<label class="control-label col-md-4">Rage (ex. 1 - 500)</label>
 							<div class="col-md-8 validate">
 				
 								<input type="number" name="generateStartNo" id="generateStartNo" class="form-control input-sm" min="0"  />
-       							to
-       							<input type="number" name="generateEndNo" id="generateEndNo"  class="form-control input-sm" min="1"  />
+       							-
+       							<input type="number" name="generateEndNo" id="generateEndNo"  class="form-control input-sm" min="2"  />
 							</div>
 						</div>
-						<div class="form-group">
-							<div class="form-check">
-							  <label class="form-check-label col-md-4">
-							    <input type="radio" class="form-check-input" name="isWalking" value="true" checked>Walk-in 
-							  </label>
-							</div>
-							<div class="form-check">
-							  <label class="form-check-label col-md-4">
-							    <input type="radio" class="form-check-input" name="isWalking" value="false">Invited 
-							  </label>
-							</div>
-						</div>
-						
 					</div>
 					<div class="modal-footer">
 						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -255,12 +187,12 @@
 	<script src="<c:url value='/static/js/dataTables.foundation.js'/>"></script>
 	<script src="<c:url value='/static/js/dataTables.jqueryui.js'/>"></script>
 
-	<%-- <script src="<c:url value='/static/js/dataTables.responsive.js'/>"></script> --%>
-<%-- 	<script src="<c:url value='/static/js/responsive.bootstrap.min.js'/>"></script> --%>
-	<%-- <script src="<c:url value='/static/js/responsive.bootstrap4.min.js'/>"></script> --%>
-	<%-- <script src="<c:url value='/static/js/responsive.foundation.min.js'/>"></script> --%>
-<%-- 	<script src="<c:url value='/static/js/responsive.jqueryui.min.js'/>"></script>
-	<script src="<c:url value='/static/js/responsive.semanticui.min.js'/>"></script> --%>
+	<script src="<c:url value='/static/js/dataTables.responsive.js'/>"></script>
+	<script src="<c:url value='/static/js/responsive.bootstrap.min.js'/>"></script>
+	<script src="<c:url value='/static/js/responsive.bootstrap4.min.js'/>"></script>
+	<script src="<c:url value='/static/js/responsive.foundation.min.js'/>"></script>
+	<script src="<c:url value='/static/js/responsive.jqueryui.min.js'/>"></script>
+	<script src="<c:url value='/static/js/responsive.semanticui.min.js'/>"></script>
 
 	<script src="<c:url value='/static/js/buttons.bootstrap.min.js'/>"></script>
 	<script src="<c:url value='/static/js/buttons.colVis.min.js'/>"></script>

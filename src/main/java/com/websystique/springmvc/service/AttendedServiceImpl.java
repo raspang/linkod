@@ -52,4 +52,11 @@ public class AttendedServiceImpl implements AttendedService{
 	}
 
 
+	@Override
+	public List<Attended> findAllAttendeds(String date, String business) {
+		// TODO Auto-generated method stub
+		return dao.findAllAttendeds(date, business);
+	}
+
+
 }

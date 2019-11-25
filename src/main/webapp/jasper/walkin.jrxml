@@ -574,9 +574,9 @@ General Santos City]]></text>
 				<imageExpression><![CDATA[$P{dost}]]></imageExpression>
 			</image>
 			<staticText>
-				<reportElement x="4" y="610" width="539" height="27" uuid="13d37f07-d363-446c-b59f-d74a573dbad5"/>
+				<reportElement x="5" y="608" width="559" height="26" uuid="13d37f07-d363-446c-b59f-d74a573dbad5"/>
 				<textElement>
-					<font fontName="Century" isBold="true"/>
+					<font fontName="Century" size="8" isBold="true"/>
 				</textElement>
 				<text><![CDATA[REMINDER: PLS. KEEP THIS STUB FOR REGISTRATION from December 3-5, 2019 (PAKITAGO PO ANG STUB NA ITO PARA PO SA REGISTRATION SIMULA DECEMBER 3-5, 2019)]]></text>
 			</staticText>
@@ -587,42 +587,48 @@ General Santos City]]></text>
 				</jr:barbecue>
 			</componentElement>
 			<textField>
-				<reportElement x="40" y="550" width="78" height="30" uuid="79f70ae2-c66a-41b4-83b0-c724a4a01833"/>
+				<reportElement x="70" y="564" width="36" height="19" uuid="79f70ae2-c66a-41b4-83b0-c724a4a01833"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="10" y="550" width="30" height="30" uuid="d20c3d0b-a7e7-4211-b469-293e77b166dc"/>
+				<reportElement x="53" y="564" width="17" height="19" uuid="d20c3d0b-a7e7-4211-b469-293e77b166dc"/>
 				<textElement verticalAlignment="Middle">
-					<font fontName="Century"/>
+					<font fontName="Century" size="8"/>
 				</textElement>
-				<text><![CDATA[ID:]]></text>
+				<text><![CDATA[No:]]></text>
 			</staticText>
 			<textField>
-				<reportElement x="37" y="15" width="78" height="30" uuid="a6b06ec7-db23-46e4-b55e-c6ec44c7a843"/>
+				<reportElement x="31" y="35" width="42" height="25" uuid="a6b06ec7-db23-46e4-b55e-c6ec44c7a843"/>
+				<box>
+					<pen lineWidth="1.0" lineStyle="Solid"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font size="10"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{id}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement x="7" y="15" width="30" height="30" uuid="5f880dec-840c-46cf-85bd-8be99f700292"/>
-				<textElement verticalAlignment="Middle">
-					<font fontName="Century"/>
+				<reportElement x="5" y="35" width="25" height="25" uuid="5f880dec-840c-46cf-85bd-8be99f700292"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="Century" size="8"/>
 				</textElement>
-				<text><![CDATA[ID:]]></text>
+				<text><![CDATA[No:]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="60" y="580" width="79" height="30" uuid="1acc436d-cc48-439d-84f2-c099972f4ffd"/>
+				<reportElement x="50" y="584" width="47" height="30" uuid="1acc436d-cc48-439d-84f2-c099972f4ffd"/>
 				<textElement verticalAlignment="Middle">
 					<font fontName="Century"/>
 				</textElement>
 				<text><![CDATA[Name: ]]></text>
 			</staticText>
 			<line>
-				<reportElement x="97" y="600" width="332" height="1" uuid="b35d5674-c994-460a-a80f-90e6d5358386"/>
+				<reportElement x="98" y="605" width="332" height="1" uuid="b35d5674-c994-460a-a80f-90e6d5358386"/>
 			</line>
 		</band>
 	</detail>

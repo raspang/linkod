@@ -4,8 +4,10 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -95,7 +97,12 @@ public class RecordController {
 	@Autowired
 	AuthenticationTrustResolver authenticationTrustResolver;
 
+	private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 	
+	 private static List<String> businessLines = Arrays.asList("OTHERS","MSME", "NGO", "MEDIA", "STUDENT", "NGA", "ACADEME");
+	
+	 
+	private JasperReportUtil jrdao = new JasperReportUtil();
 	/**
 	 * This method will list all existing users.
 	 */
@@ -103,12 +110,37 @@ public class RecordController {
 	public String listVoters(ModelMap model) {
 		List<Voter> voters = voterService.findAllVoters();
 		
+
+		
+		
 		model.addAttribute("voters", voters);
 		model.addAttribute("events", eventDateService.findAllEventDates());
 		model.addAttribute("loggedinuser", getPrincipal());
 		
 		return "personslist";
 	}
+	
+	@RequestMapping(value = { "/liststatus" }, method = RequestMethod.GET)
+	public String reportsData(ModelMap model) {
+
+		String dateStr = "";
+		if(getEnableEvent()!= null)
+			dateStr = formatter.format(getEnableEvent());
+		
+		model.addAttribute("currentDate", dateStr);
+		model.addAttribute("participantsACADEME", attendedService.findAllAttendeds(dateStr, businessLines.get(6)).size() );
+		model.addAttribute("participantsNGA", attendedService.findAllAttendeds(dateStr, businessLines.get(5)).size());
+		model.addAttribute("participantsSTUDENT", attendedService.findAllAttendeds(dateStr, businessLines.get(4)).size());
+		model.addAttribute("participantsMEDIA", attendedService.findAllAttendeds(dateStr, businessLines.get(3)).size());
+		model.addAttribute("participantsNGO", attendedService.findAllAttendeds(dateStr, businessLines.get(2)).size());
+		model.addAttribute("participantsMSME", attendedService.findAllAttendeds(dateStr, businessLines.get(1)).size());
+		model.addAttribute("participantsOTHERS", attendedService.findAllAttendeds(dateStr, businessLines.get(0)).size());
+		
+		model.addAttribute("loggedinuser", getPrincipal());
+		
+		return "statuslist";
+	}
+	
 	
 	@RequestMapping("/json/data/listvoters")
 	@ResponseBody
@@ -134,6 +166,12 @@ public class RecordController {
 		return codeService.findAllCodes();
 	}*/
 
+	private Date getEnableEvent() {
+		List<EventDate> events = eventDateService.findAllEnableEventDates();
+		if(!events.isEmpty())
+			return events.get(events.size()-1).getDate();
+		return null;
+	}
 	
 	@RequestMapping(value = { "/mark-participant-{id}" }, method = RequestMethod.GET)
 	public String markAttended(@PathVariable String id, ModelMap model,HttpServletRequest request) {
@@ -141,9 +179,9 @@ public class RecordController {
 		Voter voter = voterService.findById(Long.parseLong(id));
 		
 		Attended attended = new Attended();
-		List<EventDate> events = eventDateService.findAllEnableEventDates();
-		if(!events.isEmpty())
-			attended.setDate(events.get(events.size()-1).getDate());
+		Date dateEvent = getEnableEvent();
+		if(dateEvent != null)
+			attended.setDate(dateEvent);
 	
 		attended.setVoter(voter);
 		
@@ -156,7 +194,7 @@ public class RecordController {
 		model.addAttribute("events", eventDateService.findAllEventDates());
 		model.addAttribute("loggedinuser", getPrincipal());
 		//return "personslist";
-		return "redirect:/listvoters";
+		return "redirect:/";
 	}
 	
 	
@@ -177,7 +215,7 @@ public class RecordController {
 		eventDateService.updateEventDate(eventDate);
 		
 		model.addAttribute("loggedinuser", getPrincipal());
-		return "personslist";
+		return "redirect:/";
 	}
 		
 	
@@ -242,8 +280,14 @@ public class RecordController {
 	public String pdfReportRegistrationForm(HttpServletRequest request, HttpServletResponse response)
 			throws JRException, IOException, NamingException {
 
-		String reportFileName = "myqr";
-		JasperReportUtil jrdao = new JasperReportUtil();
+		Long generateStartNo = Long.parseLong(request.getParameter("generateStartNo"));
+		Long generateEndNo = Long.parseLong(request.getParameter("generateEndNo"));	
+		boolean isWalking= Boolean.parseBoolean(request.getParameter("isWalking")); 
+		
+		String reportFileName = "invitee_form";
+		if(isWalking)
+			reportFileName = "walkin";
+		
 
 		HashMap<String, Object> hmParams = new HashMap<String, Object>();
 		
@@ -252,7 +296,7 @@ public class RecordController {
 		try {
 			 File initialImage = new File(request.getSession().getServletContext().getRealPath("/jasper/dost.png"));
 			 image1 = ImageIO.read(initialImage);
-			}catch(Exception e) {}
+		}catch(Exception e) {}
 		
 		hmParams.put("dost", image1);
 
@@ -260,15 +304,28 @@ public class RecordController {
 
 		List<Map<String, ?>> listCodes = new ArrayList<Map<String, ?>>();
 		
-		Long generateStartNo = Long.parseLong(request.getParameter("generateStartNo"));
-		Long generateEndNo = Long.parseLong(request.getParameter("generateEndNo"));
-
 
 		Map<String, Object> m = null;
 		if(generateStartNo > 0 && generateStartNo <= generateEndNo)
 		for(Voter participant : voterService.findAllVoters(generateStartNo, generateEndNo)) {
 				m = new HashMap<String, Object>();
+				
+				m.put("id", String.valueOf(participant.getId()));
 				m.put("number", participant.getCode() );
+				
+				if(!isWalking) {
+					m.put("lastName", participant.getLastName().toUpperCase());
+					m.put("middleName", participant.getMiddleName().toUpperCase());
+					m.put("firstName", participant.getFirstName().toUpperCase());
+					m.put("office", participant.getCompany());
+					m.put("designation", participant.getDesignation());
+					m.put("contactNo", participant.getContact());
+					m.put("emailAdd", participant.getEmail());
+					m.put("age", String.valueOf(participant.getAge()));
+					m.put("sex", participant.getGender());
+					m.put("status", participant.getStatus());
+					m.put("business", participant.getBusiness());
+				}
 				listCodes.add(m);
 		}
 		
@@ -431,7 +488,7 @@ public class RecordController {
 		model.addAttribute("voter", voter);
 		model.addAttribute("edit", false);
 		model.addAttribute("genders", Arrays.asList("Male","Famale"));
-		model.addAttribute("businessLines", Arrays.asList("OTHERS","MSME", "NGO", "MEDIA", "STUDENT", "NGA", "ACADEME"));
+		model.addAttribute("businessLines", businessLines);
 		model.addAttribute("loggedinuser", getPrincipal());		
 		return "person";
 	}

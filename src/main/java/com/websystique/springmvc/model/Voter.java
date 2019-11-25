@@ -68,6 +68,9 @@ public class Voter implements Serializable{
 	
 	private String business;
 	
+	@JsonIgnore
+	private String email = "";
+	
 	
 	@Transient
 	private String completeName;
@@ -78,9 +81,7 @@ public class Voter implements Serializable{
     @OneToMany(cascade = CascadeType.REFRESH, fetch = FetchType.EAGER, mappedBy = "voter", orphanRemoval = true)
     private List<Attended> attends = new ArrayList<>();
     
-    @JsonFormat(pattern = "yyyy-mm-dd")
-    @Column(updatable = false)
-    private Date created_At;
+
     @JsonFormat(pattern = "yyyy-mm-dd")
     private Date updated_At;
     
@@ -238,5 +239,14 @@ public class Voter implements Serializable{
 		this.updated_At = updated_At;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	
 
 }

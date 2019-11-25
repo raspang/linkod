@@ -15,6 +15,9 @@ public interface AttendedService {
 	void deleteAttended(Attended attended);
 
 	List<Attended> findAllAttends(); 
+	
+	public List<Attended> findAllAttendeds(String date, String business);
 
+	
 
 }

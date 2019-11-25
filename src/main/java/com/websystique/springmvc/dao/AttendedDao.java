@@ -15,5 +15,6 @@ public interface AttendedDao {
 	
 	List<Attended> findAllAttendeds();
 
+	List<Attended> findAllAttendeds(String date, String business);
 }
 

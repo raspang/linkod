@@ -48,6 +48,7 @@ public class VoterServiceImpl implements VoterService{
 			entity.setStatus(code.getStatus());
 			entity.setBusiness(code.getBusiness());
 			entity.setUpdated_At(new Date());
+			entity.setEmail(code.getEmail());
 		}
 	}
 

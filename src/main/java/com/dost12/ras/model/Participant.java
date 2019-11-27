@@ -68,6 +68,9 @@ public class Participant implements Serializable{
 	
 	private String business;
 	
+	@Column(name="isVIP")
+	private boolean vip = Boolean.FALSE;
+	
 	@JsonIgnore
 	private String email = "";
 	
@@ -88,6 +91,7 @@ public class Participant implements Serializable{
     
 	public Participant() {		
 		this.code = "R12"+UUID.randomUUID().toString().substring(23).toUpperCase();
+		vip = Boolean.FALSE;
 	}
 
 	public Long getId() {
@@ -247,6 +251,14 @@ public class Participant implements Serializable{
 		this.email = email;
 	}
 
-	
+	public boolean isVip() {
+		return vip;
+	}
+
+	public void setVip(boolean vip) {
+		this.vip = vip;
+	}
+
+
 
 }

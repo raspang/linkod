@@ -49,6 +49,7 @@ public class VoterServiceImpl implements VoterService{
 			entity.setBusiness(code.getBusiness());
 			entity.setUpdated_At(new Date());
 			entity.setEmail(code.getEmail());
+			entity.setVip(code.isVip());
 		}
 	}
 

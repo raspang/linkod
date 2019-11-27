@@ -118,11 +118,8 @@
 							<th >Name</th>
 							<th >Company</th>
 							<th >Designation</th>
-<!-- 							<th >Contact</th>
-							<th >Age</th>
-							<th >Gender</th>
-							<th >Status</th> -->
 							<th >Business Line</th>
+							<th >VIP</th>
 							<sec:authorize access="hasRole('ADMIN')">
 							<th ></th>
 							</sec:authorize>

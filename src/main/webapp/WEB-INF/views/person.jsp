@@ -32,7 +32,7 @@
 			<div class="container">
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="firstName">First Name</label>
+					<label class="col-md-3 control-label" for="firstName">First Name</label>
 					<div class="col-md-7">
 						<form:input type="text" path="firstName" id="firstName" class="form-control input-sm" required="required"/>
 						<div class="has-error">
@@ -44,7 +44,7 @@
 
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="middleName">Middle Name</label>
+					<label class="col-md-3 control-label" for="middleName">Middle Name</label>
 					<div class="col-md-7">
 						<form:input type="text" path="middleName" id="middleName" class="form-control input-sm" />
 						<div class="has-error">
@@ -56,7 +56,7 @@
 			
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="lastName">Last Name</label>
+					<label class="col-md-3 control-label" for="lastName">Last Name</label>
 					<div class="col-md-7">
 						<form:input type="text" path="lastName" id="lastName" class="form-control input-sm" required="required"/>
 						<div class="has-error">
@@ -68,7 +68,7 @@
 
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="company">Company</label>
+					<label class="col-md-3 control-label" for="company">Company</label>
 					<div class="col-md-7">
 						<form:input type="text" path="company" id="company" class="form-control input-sm"/>
 						<div class="has-error">
@@ -80,7 +80,7 @@
 			
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="designation">Designation</label>
+					<label class="col-md-3 control-label" for="designation">Designation</label>
 					<div class="col-md-7">
 						<form:input type="text" path="designation" id="designation" class="form-control input-sm"/>
 						<div class="has-error">
@@ -92,7 +92,7 @@
 			
 				<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="contact">Contact</label>
+					<label class="col-md-3 control-label" for="contact">Contact</label>
 					<div class="col-md-7">
 						<form:input type="text" path="contact" id="contact" class="form-control input-sm" />
 						<div class="has-error">
@@ -104,7 +104,7 @@
 			
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="contact">Email</label>
+					<label class="col-md-3 control-label" for="contact">Email</label>
 					<div class="col-md-7">
 						<form:input type="email" path="email" id="email" class="form-control input-sm" />
 						<div class="has-error">
@@ -116,7 +116,7 @@
 			
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="age">Age</label>
+					<label class="col-md-3 control-label" for="age">Age</label>
 					<div class="col-md-7">
 						<form:input type="number" path="age" id="age" class="form-control input-sm" />
 						<div class="has-error">
@@ -128,7 +128,7 @@
 					
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="lastName">Gender</label>
+					<label class="col-md-3 control-label" for="lastName">Gender</label>
 					<div class="col-md-7">				
 						<form:select path="gender" items="${genders}" class="form-control" />
 					</div>
@@ -140,7 +140,7 @@
 
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="status">Civil Status</label>
+					<label class="col-md-3 control-label" for="status">Civil Status</label>
 					<div class="col-md-7">
 						<form:input type="text" path="status" id="status" class="form-control input-sm" />
 						<div class="has-error">
@@ -154,13 +154,25 @@
 							
 			<div class="row">
 				<div class="form-group col-md-12">
-					<label class="col-md-3 control-lable" for="business">Business Line</label>
+					<label class="col-md-3 control-label" for="business">Business Line</label>
 					<div class="col-md-7">				
 						<form:select path="business" items="${businessLines}" class="form-control" />
 					</div>
 				</div>
 			</div>
 											
+
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label class="col-md-3 control-label" for="vip">Is VIP</label>
+					<div class="col-md-1">				
+							<form:checkbox path="vip" id="vip" class="form-control"/>
+							
+					</div>
+				</div>
+			</div>
+			
+			
 
 			<div class="row">
 				<div class="form-actions floatRight">
